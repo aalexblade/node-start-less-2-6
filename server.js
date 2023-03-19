@@ -1,10 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 
-
-
-const { createUsers, getUsersList, getUsersById } = require('./controllers/userController');
-const { checkUserId } = require('./middlewares/usersMiddleware');
+const usersRouts = require('./routes/usersRouts');
+// const { checkUserId } = require('./middlewares/usersMiddleware');
 
 const app = express();
 
@@ -33,27 +31,14 @@ app.use((req, res, next) => {
 /**
  *Check if user exists
  */
-app.use('/api/v1/users/:id', checkUserId );
+// app.use('/api/v1/users/:id', checkUserId);
+
+app.use('/api/v1/users', usersRouts);
 
 // CONTROLLERS
-
-/**
- * Create user
- */
-
-app.post('/api/v1/users', createUsers);
-
-/**
- * Get user list
- */
-
-app.get('/api/v1/users', getUsersList);
-
-/**
- * Get user by id
- */
-
-app.get('/api/v1/users/:id', getUsersById);
+// app.post('/api/v1/users', createUsers);
+// app.get('/api/v1/users', getUsersList);
+// app.get('/api/v1/users/:id', getUsersById);
 
 /**
  * Update user by id
@@ -65,6 +50,12 @@ app.patch('./api/users/:id', (req, res) => { });
  */
 app.delete('./api/users/:id', (req, res) => {
   res.sendStatus(204);
+});
+
+app.use((err, req, res, next)=> {
+  res.status(500).json({
+    msg: err.message,
+  });
 });
 
 // SERVER

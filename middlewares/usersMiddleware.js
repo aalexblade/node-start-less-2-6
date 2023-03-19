@@ -4,9 +4,11 @@ exports.checkUserId = async (req, res, next) => {
   try {
     const { id } = req.params;
 
+    if (id.length < 10) throw Error('Invalid id');
+
     const dataFromDB = await fs.readFile('./models.json');
     const users = JSON.parse(dataFromDB);
-    const user = users.find((user) => user.id === id);
+    const user = users.find((item) => item.id === id);
 
     if (!user) {
       return res.status(404).json({
@@ -17,7 +19,7 @@ exports.checkUserId = async (req, res, next) => {
     req.user = user;
 
     next();
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    next(err);
   }
 };
