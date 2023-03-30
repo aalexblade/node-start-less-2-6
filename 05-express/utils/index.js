@@ -1,9 +1,8 @@
 const AppError = require('./appError');
 const catchAsync = require('./catchAsync');
-const userValidator = require('./userValidator');
+// const createUserDataValidator = require('./userValidatir');
 
 module.exports = {
   AppError,
   catchAsync,
-  userValidator,
 };
