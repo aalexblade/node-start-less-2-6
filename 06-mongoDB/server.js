@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 dotenv.config({ path: './.env' });
 
 const userRoutes = require('./routes/userRoutes');
-const authRouts = require('./routes/authRouts');
 
 const app = express();
 
@@ -52,7 +51,6 @@ app.use((req, res, next) => {
 // app.use('/api/users/:id', checkUserId);
 
 app.use('/api/users', userRoutes);
-app.use('/api/auth', authRouts);
 // CONTROLLERS
 // app.post('/api/users', createUser);
 // app.get('/api/users', getUsersList);
