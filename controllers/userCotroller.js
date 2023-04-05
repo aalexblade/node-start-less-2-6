@@ -74,3 +74,9 @@ exports.getMe = (req, res) => {
     user: req.user,
   });
 };
+
+exports.updateMe = catchAsync(async (req, res) => {
+  res.status(200).json({
+    user: req.user,
+  });
+});

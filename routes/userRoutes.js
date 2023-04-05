@@ -7,9 +7,10 @@ const {
   getUserById,
   updateUserById,
   deleteUserById,
-  getMe
+  getMe,
+  updateMe
 } = require('../controllers/userCotroller');
-const { checkUserId, checkCreateUserData, checkUpdateUserData } = require('../middlewares/userMiddleware');
+const { checkUserId, checkCreateUserData, checkUpdateUserData, uploadUserPhoto } = require('../middlewares/userMiddleware');
 const { protect, allowFor } = require('../middlewares/authMiddleware');
 
 const router = Router();
@@ -18,7 +19,7 @@ const router = Router();
 router.use(protect);
 
 router.get('/me', getMe);
-// router.patch('/update-me', updateMe);
+router.patch('/update-me', uploadUserPhoto, updateMe);
 // router.patch('/update-my-password, updateMyPassword);
 
 // all routes after are allowed only for specific user roles(admin)

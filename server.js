@@ -37,6 +37,9 @@ mongoose
 app.use(cors());
 app.use(express.json());
 
+// Server statics files
+app.use(express.static('statics'));
+
 // MIDDLEWARES
 /**
  * Global midlleware.
