@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-
 const User = require('../models/userModel');
 const { catchAsync, userValidator, AppError } = require('../utils');
 
@@ -49,6 +48,7 @@ exports.protect = catchAsync(async (req, res, next) => {
  * allowFor('admin', 'user')
  * Use only after 'protect', middleware
  */
+
 exports.allowFor = (...roles) =>
   (req, res, next) => {
     if (roles.includes(req.user.role)) return next();

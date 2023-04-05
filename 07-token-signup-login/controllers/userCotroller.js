@@ -68,9 +68,3 @@ exports.deleteUserById = catchAsync(async (req, res) => {
 
   res.sendStatus(204);
 });
-
-exports.getMe = (req, res) => {
-  res.status(200).json({
-    user: req.user,
-  });
-};

@@ -1,11 +1,11 @@
 {
-  "name": "03",
+  "name": "07-token",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "nodemon index.js",
-    "start": "nodemon server.js",
+    "dev": "nodemon server.js",
     "prod": "node server.js"
   },
   "keywords": [],
