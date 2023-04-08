@@ -1,9 +1,8 @@
 const { Types } = require('mongoose');
-const multer = require('multer');
-const uuid = require('uuid').v4;
 
 const { AppError, catchAsync, userValidator } = require('../utils');
 const User = require('../models/userModel');
+const ImageService = require('../services/imageService');
 
 /**
  * Check user id middleware
@@ -59,29 +58,31 @@ exports.checkUpdateUserData = catchAsync(async (req, res, next) => {
   next();
 });
 
-const multerStorege = multer.diskStorage({
-  destination: (req, file, callbackFn) => {
-    callbackFn(null, 'statics/img/users');
-  },
-  filename: (req, file, callbackFn) => {
-    const ext = file.mimetype.split('/')[1];
+// const multerStorege = multer.diskStorage({
+//   destination: (req, file, callbackFn) => {
+//     callbackFn(null, 'statics/img/users');
+//   },
+//   filename: (req, file, callbackFn) => {
+//     const ext = file.mimetype.split('/')[1];
 
-    callbackFn(null, `${req.user.id}-${uuid()}.${ext}`);
-  }
-});
+//     callbackFn(null, `${req.user.id}-${uuid()}.${ext}`);
+//   }
+// });
 
-const multerFilter = (req, file, callbackFn) => {
-  if (file.mimetype.startsWith('image/')) {
-    callbackFn(null, true);
-  } else {
-    callbackFn(new AppError(400, 'Upload images only...'), false);
-  }
-};
+// const multerFilter = (req, file, callbackFn) => {
+//   if (file.mimetype.startsWith('image/')) {
+//     callbackFn(null, true);
+//   } else {
+//     callbackFn(new AppError(400, 'Upload images only...'), false);
+//   }
+// };
 
-exports.uploadUserPhoto = multer({
-  storage: multerStorege,
-  fileFilter: multerFilter,
-  limits: {
-    fileSize: 500 * 400
-  }
-}).single('avatar');
+// exports.uploadUserPhoto = multer({
+//   storage: multerStorege,
+//   fileFilter: multerFilter,
+//   limits: {
+//     fileSize: 2 * 1024 * 1024,
+//   }
+// }).single('avatar');
+
+module.exports = ImageService.upload('avatar');
